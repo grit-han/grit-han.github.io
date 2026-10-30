@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.grittyworld.dayxday",
+      "sha256_cert_fingerprints": [
+        "04:F7:AE:0B:28:73:D6:37:D0:16:76:F0:3E:E6:DB:72:B2:27:B0:27:DB:77:12:95:B7:EC:E5:87:F5:B2:78:8A"
+      ]
+    }
+  }
+]
