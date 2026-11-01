@@ -9,5 +9,15 @@
   market = 'https://play.google.com/store/apps/details?id=com.grittyworld.dayxday' + referrer;
  }
  document.getElementById('install-app').href=market;
- if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent))location.replace(market);
+ if (/Android/i.test(navigator.userAgent)) {
+  location.replace('intent://friend-invite?token=' + encodeURIComponent(valid ? token : 'invalid') + '#Intent;scheme=dayxday;package=com.grittyworld.dayxday;S.browser_fallback_url=' + encodeURIComponent(market) + ';end');
+ } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) {
+  // Universal Links normally bypass this document. Recover browser-opened links before falling back to the store.
+  let left = false;
+  const stop = () => { left = true; };
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+  window.addEventListener('pagehide', stop);
+  location.replace(open.href);
+  setTimeout(() => { if (!left && !document.hidden) location.replace(market); }, 1500);
+ }
 })();
